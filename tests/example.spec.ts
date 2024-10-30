@@ -33,6 +33,5 @@ test('Check the Bounty Bond', async ({ webPage, context }) =>{
   // await walletPage.getByRole('button', { name: 'Sign the transaction' }).click()
   const transactionSuccess = webPage.getByText('Operation Success')
 
-  await transactionSuccess.w
 
 })
