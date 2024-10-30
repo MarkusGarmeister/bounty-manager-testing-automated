@@ -6,8 +6,8 @@ export class MainBountyPage {
     readonly polkadotConnect: Locator;
     readonly newBountyButton: Locator;
     readonly bountyManagerLogo: Locator;
-    readonly cancelButton: Locator;
-    readonly submitButton: Locator;
+    readonly showAllBounties: Locator;
+    readonly showALLOptions: Locator;
 
     constructor(page: Page) {
         this.page = page
@@ -15,7 +15,7 @@ export class MainBountyPage {
         this.polkadotConnect = page.getByText('Logos/polkadot-js-wallet 2 Polkadot.js Connect Buttons/Back');
         this.newBountyButton = page.getByRole('button', { name: 'NEW BOUNTY' });
         this.bountyManagerLogo = page.getByRole('button', { name: '88D4FD0B-8452-417A-9EEF-' });
-        this.cancelButton = page.getByRole('button', { name: 'CANCEL' })
-        this.submitButton = page.getByRole('button', { name: 'SUBMIT' })
+        this.showAllBounties = page.getByLabel('all bounties');
+        this.showALLOptions = page.getByLabel('all options');
     }
 }
