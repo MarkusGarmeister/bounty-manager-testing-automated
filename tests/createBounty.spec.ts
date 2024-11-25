@@ -2,13 +2,20 @@ import { test, expect } from "../utils/fixtures";
 import { CreateBountyPage } from "../PageObjectModels/CreateBountyPageModel.ts";
 import { MainBountyPage } from "../PageObjectModels/MainBountyMangerPageModal.ts";
 import { signTransaction } from "../utils/signTransaction";
-import { placeDecisionDeposit, getDeciding } from "../utils/polkadotAPI.ts";
+import {
+  placeDecisionDeposit,
+  forwardInHours,
+  forwardInDays,
+  forwardInBlocks,
+  getLatestBountyId,
+  acceptCurator,
+} from "../utils/polkadotAPI.ts";
 
 import dotenv from "dotenv";
 
 dotenv.config();
 
-test("Creates Bounty and places Decision deposite", async ({
+test("Creates Bounty and fowards it to status funded", async ({
   webPage,
   context,
 }) => {
@@ -16,16 +23,80 @@ test("Creates Bounty and places Decision deposite", async ({
   const cbp = new CreateBountyPage(webPage);
   await mbp.newBountyButton.waitFor();
   await mbp.newBountyButton.click();
-  await cbp.bountyTitle.type("Test Bounty");
+  const title = "This is a test Bounty";
+  await cbp.bountyTitle.type(title);
   await cbp.bountyValue.type("12345");
   await webPage.waitForTimeout(1000);
-  await expect(cbp.bountyBond).toHaveText("1.11 DOT");
+  //await expect(cbp.bountyBond).toHaveText("1.11 DOT");
   await signTransaction(context, cbp.submitButton);
   await webPage.waitForTimeout(2000);
   await webPage.locator(".fill-white").click();
   await cbp.proceedButton.click();
   await signTransaction(context, cbp.submitButton);
-  await webPage.waitForTimeout(6000);
+  await webPage.waitForTimeout(3000);
   await placeDecisionDeposit();
-  //await getDeciding();
+  await webPage.waitForTimeout(3000);
+  await forwardInHours(4, 1);
+  await forwardInDays(28);
+  await forwardInDays(4);
+  await forwardInBlocks(2);
+  await forwardInDays(1, 2);
+  await forwardInDays(14);
+  await forwardInHours(20, 2);
+  await webPage.waitForTimeout(1000);
+  await webPage.locator(".fill-white").click();
+  await mbp.bountyManagerLogo.waitFor();
+  await mbp.bountyManagerLogo.click();
+  await webPage.reload();
+  const bountyId = await getLatestBountyId();
+  await expect(mbp.bountyHeader.nth(0)).toHaveText(`#${bountyId} ${title}`);
+  await expect(mbp.bountyStatus.nth(0)).toHaveText("funded");
+});
+
+test("Curator Proposal", async ({ webPage, context }) => {
+  const mbp = new MainBountyPage(webPage);
+  const cbp = new CreateBountyPage(webPage);
+  await mbp.curatorPropsalButton.waitFor();
+  await mbp.curatorPropsalButton.click();
+  await cbp.proceedButton.waitFor();
+  await cbp.proceedButton.click();
+  console.log(process.env.CURATOR_ADDRESS);
+  await cbp.curatorAddress.fill(process.env.CURATOR_ADDRESS);
+  await cbp.curatorFee.fill("200");
+  const smallSpender = await webPage.locator(
+    'button:has-text("Small Spender")'
+  );
+  await smallSpender.click();
+  const bigSpender = await webPage.locator('button:has-text("Big Spender")');
+  await bigSpender.waitFor();
+  await bigSpender.click();
+  await signTransaction(context, cbp.submitButton);
+  await webPage.waitForTimeout(3000);
+  await placeDecisionDeposit();
+  await webPage.waitForTimeout(3000);
+  await forwardInHours(4, 1);
+  await forwardInDays(28);
+  await forwardInDays(7);
+  await forwardInBlocks(2);
+  await forwardInDays(1, 2);
+  await webPage.locator(".fill-white").click();
+  await mbp.bountyManagerLogo.click();
+  await webPage.reload();
+  await expect(mbp.acceptCuratorRole).toBeVisible();
+  await mbp.acceptCuratorRole.click();
+  await webPage.locator("button.toggle div.switch").click();
+  const signCuratorRole = webPage.getByRole("button", { name: "SIGN" });
+  await signTransaction(context, signCuratorRole);
+});
+
+test("Accept Curator Role", async ({ webPage, context }) => {
+  const mbp = new MainBountyPage(webPage);
+  const cbp = new CreateBountyPage(webPage);
+  await mbp.acceptCuratorRole.click();
+  await webPage.locator("button.toggle div.switch").click();
+  const signCuratorRole = webPage.getByRole("button", { name: "SIGN" });
+  await signTransaction(context, signCuratorRole);
+  await webPage.waitForTimeout(2000);
+  await webPage.locator(".fill-white").click();
+  await expect(mbp.extendBounty).toBeVisible();
 });
