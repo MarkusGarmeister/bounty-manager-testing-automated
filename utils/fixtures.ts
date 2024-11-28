@@ -56,8 +56,7 @@ export const test = base.extend<{
     await signInButton.waitFor()
     await signInButton.click()
 
-    const polkadotConnect = await page.getByText('Logos/polkadot-js-wallet 2 Polkadot.js Connect Buttons/Back')
-    const polkadotConnectIsVisible = await polkadotConnect.isVisible()
+    const polkadotConnect = await page.getByRole("button", {name: "Logos/polkadot-js-wallet 2",});    const polkadotConnectIsVisible = await polkadotConnect.isVisible()
     if (!polkadotConnectIsVisible) {
         const closeButton = await page.locator('.ml-auto > .s-D2WQl_trxvyh')
         await closeButton.click()
