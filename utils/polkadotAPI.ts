@@ -16,6 +16,7 @@ async function currentBlock() {
 
   return currentBlock;
 }
+
 export async function getLatestBountyId() {
   const referendaCount = await api.query.bounties.bountyCount();
 
@@ -25,7 +26,7 @@ export async function getLatestBountyId() {
 
   return latestReferenda;
 }
-
+// returns the latest referenda ID, with this you can identify the last action on the blockchain
 export async function getLatestReferendaId() {
   const referendaCount = (
     await api.query.referenda.referendumCount()
@@ -38,6 +39,7 @@ export async function getLatestReferendaId() {
   return latestReferenda;
 }
 
+// places the Decision Deposite and needs to be done after creating a bounty or proposing a curator
 export async function placeDecisionDeposit() {
   console.log("I start deposite");
   const keyring = new Keyring({ type: "sr25519" });
@@ -66,44 +68,18 @@ export async function placeDecisionDeposit() {
   }
 }
 
-export async function acceptCurator() {
-  const keyring = new Keyring({ type: "sr25519" });
-  const sender = keyring.addFromMnemonic(
-    "grace world memory render hub effort wisdom thumb panther cause trophy fuel"
-  );
-  try {
-    // Fetch the current bounty count
-    const bountyId = await api.query.bounties.bountyCount();
-
-    // Submit a transaction to accept the curator for the bounty
-    const txHash = await api.tx.bounties
-      .acceptCurator(bountyId)
-      .signAndSend(sender, (result) => {
-        console.log(`Transaction status: ${result.status}`);
-        if (result.status.isInBlock || result.status.isFinalized) {
-          console.log("Transaction included in block");
-        }
-      });
-
-    console.log(
-      `Curator accepted for bounty ID: ${bountyId}. Transaction Hash: ${txHash}`
-    );
-  } catch (error) {
-    console.error("Error accepting curator:", error);
-  }
-}
-
+// forwards the blockchain by hour , argument b is optional and can be used to subtract single blocks
 export async function forwardInHours(n: number, b: number = 0) {
-  const fourHoursInBlock = (n * 60 * 60) / 6 - b;
+  const hoursInBlocks = (n * 60 * 60) / 6 - b;
   let currentHeader = await api.rpc.chain.getHeader();
   let currentBlockNumber = currentHeader.number.toNumber();
   const blockHash = await api.rpc.chain.getBlockHash(currentBlockNumber);
   const newBlock = await api.rpc("dev_newBlock", {
     count: 1,
-    unsafeBlockHeight: currentBlockNumber + fourHoursInBlock,
+    unsafeBlockHeight: currentBlockNumber + hoursInBlocks,
   });
 }
-
+// forwards the blockchain by days , argument b is optional and can be used to subtract single blocks
 export async function forwardInDays(n: number, b: number = 0) {
   const daysInBlock = (n * 24 * 60 * 60) / 6 - b;
   let currentHeader = await api.rpc.chain.getHeader();
@@ -115,6 +91,7 @@ export async function forwardInDays(n: number, b: number = 0) {
   });
 }
 
+// forwards the blockchain by blocks
 export async function forwardInBlocks(n: number) {
   const blocks = n;
   let currentHeader = await api.rpc.chain.getHeader();

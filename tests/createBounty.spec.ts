@@ -8,7 +8,6 @@ import {
   forwardInDays,
   forwardInBlocks,
   getLatestBountyId,
-  acceptCurator,
 } from "../utils/polkadotAPI.ts";
 
 import dotenv from "dotenv";
@@ -32,17 +31,17 @@ test("Creates Bounty and fowards it to status funded", async ({
   await webPage.waitForTimeout(2000);
   await webPage.locator(".fill-white").click();
   await cbp.proceedButton.click();
-  await signTransaction(context, cbp.submitButton);
+  await signTransaction(context, cbp.submitButton); // Bounty created
   await webPage.waitForTimeout(3000);
   await placeDecisionDeposit();
   await webPage.waitForTimeout(3000);
-  await forwardInHours(4, 1);
-  await forwardInDays(28);
-  await forwardInDays(4);
-  await forwardInBlocks(2);
-  await forwardInDays(1, 2);
-  await forwardInDays(14);
-  await forwardInHours(20, 2);
+  await forwardInHours(4, 1); // status: Preparing --> Deciding
+  await forwardInDays(28); // status: Deciding --> Confirming
+  await forwardInDays(4); // status: Confirming --> Bounty goes to Referrenda (check Sheduler)
+  await forwardInBlocks(2); // accept
+  await forwardInDays(1, 2); // Bounty approved
+  await forwardInDays(14); // fowarding funding period
+  await forwardInHours(20, 2); // funding period ended and bounty is funded
   await webPage.waitForTimeout(1000);
   await webPage.locator(".fill-white").click();
   await mbp.bountyManagerLogo.waitFor();
