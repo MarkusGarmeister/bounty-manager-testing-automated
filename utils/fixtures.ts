@@ -9,7 +9,7 @@ import dotenv from "dotenv";
 import { initApi } from "./polkadotAPI";
 
 dotenv.config();
-
+// before each test the api will be started and the wallet imported
 base.beforeAll(async () => {
   await initApi();
 });
@@ -17,6 +17,11 @@ base.beforeAll(async () => {
 export const test = base.extend<{
   context: BrowserContext;
   extensionId: string;
+  walletDetails: {
+    descriptiveName: string;
+    password: string;
+    secretKey: string;
+  };
   webPage: Page;
 }>({
   context: async ({}, use) => {
@@ -38,7 +43,14 @@ export const test = base.extend<{
     const extensionId = background.url().split("/")[2];
     await use(extensionId);
   },
-  webPage: async ({ page, extensionId, context }, use) => {
+  walletDetails: async ({}, use) => {
+    await use({
+      descriptiveName: "test",
+      password: process.env.POLKADOT_WALLET_PASSWORD,
+      secretKey: process.env.POLKADOT_WALLET_SECRET_KEY,
+    });
+  },
+  webPage: async ({ page, extensionId, context, walletDetails }, use) => {
     await page.goto(`chrome-extension://${extensionId}/index.html`);
     await page
       .locator('button:has-text("Understood, let me continue")')
@@ -47,15 +59,15 @@ export const test = base.extend<{
     await page.getByRole("link", { name: "Import account from pre-" }).click();
     await page
       .locator("textarea.sc-hKgKIp.jjwdJy")
-      .fill(process.env.POLKADOT_WALLET_SECRET_KEY);
+      .fill(walletDetails.secretKey);
     const nextButton = page.locator('button:has-text("Next")');
     await nextButton.click();
     const descriptiveNameField = page.locator("input.sc-eCstZk.jWiums").nth(0);
     const passwordField = page.locator('input[type="password"]').nth(0);
     const repeatPasswordField = page.locator('input[type="password"]').nth(1);
-    await descriptiveNameField.type("test");
-    await passwordField.fill(process.env.POLKADOT_WALLET_PASSWORD);
-    await repeatPasswordField.fill(process.env.POLKADOT_WALLET_PASSWORD);
+    await descriptiveNameField.type(walletDetails.descriptiveName);
+    await passwordField.fill(walletDetails.password);
+    await repeatPasswordField.fill(walletDetails.password);
     const addAccountButton = page.locator(
       'button:has-text("Add the account with the supplied seed")'
     );
@@ -68,7 +80,7 @@ export const test = base.extend<{
     await signInButton.waitFor();
     await signInButton.click();
     const polkadotConnect = await page.getByRole("button", {
-      name: "Logos/polkadot-js-wallet 2",
+      name: "Logo Polkadot.js Connect",
     });
     const polkadotConnectIsVisible = await polkadotConnect.isVisible();
     if (!polkadotConnectIsVisible) {
@@ -87,9 +99,7 @@ export const test = base.extend<{
     await walletPage
       .getByRole("button", { name: "Connect 1 account(s)" })
       .click();
-    await page
-      .getByText("test 14DKoXcdhLjWBwASvFzK... Select Buttons/Back")
-      .click();
+    await page.getByText(`${walletDetails.descriptiveName}`).click();
     await use(page);
   },
 });

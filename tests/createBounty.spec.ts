@@ -14,7 +14,7 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-test("Creates Bounty and fowards it to status funded", async ({
+test.only("Creates Bounty and fowards it to status funded", async ({
   webPage,
   context,
 }) => {
@@ -99,3 +99,13 @@ test("Accept Curator Role", async ({ webPage, context }) => {
   await webPage.locator(".fill-white").click();
   await expect(mbp.extendBounty).toBeVisible();
 });
+
+// test.describe("Wallet Tests", () => {
+//   test.use({
+//     walletDetails: {
+//       descriptiveName: "Curator",
+//       password: process.env.POLKADOT_WALLET_PASSWORD,
+//       secretKey: process.env.CURATOR_SECRET_KEY,
+//     },
+//   });
+// });

@@ -16,7 +16,7 @@ async function currentBlock() {
 
   return currentBlock;
 }
-
+// returns the latest bounty ID
 export async function getLatestBountyId() {
   const referendaCount = await api.query.bounties.bountyCount();
 
@@ -101,4 +101,17 @@ export async function forwardInBlocks(n: number) {
     count: 1,
     unsafeBlockHeight: currentBlockNumber + blocks,
   });
+}
+
+export async function getFundingPeriod(currentBlock: number) {
+  const completeFundingPeriod = 20390400; // at this block the funding periode is 24 days
+  const diffCurrentBlock = currentBlock - completeFundingPeriod;
+  const oneFundingPeriodInBlocks = (24 * 24 * 60 * 60) / 6;
+  const currentFundingPeriode = diffCurrentBlock % oneFundingPeriodInBlocks;
+  console.log(
+    diffCurrentBlock,
+    oneFundingPeriodInBlocks,
+    currentFundingPeriode
+  );
+  return currentFundingPeriode;
 }
