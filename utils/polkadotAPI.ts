@@ -103,11 +103,14 @@ export async function forwardInBlocks(n: number) {
   });
 }
 
-export async function getFundingPeriod(currentBlock: number) {
+export async function getFundingPeriod() {
   const completeFundingPeriod = 20390400; // at this block the funding periode is 24 days
-  const diffCurrentBlock = currentBlock - completeFundingPeriod;
+  let currentHeader = await api.rpc.chain.getHeader();
+  let currentBlockNumber = currentHeader.number.toNumber();
+  const diffCurrentBlock = Math.abs(currentBlockNumber - completeFundingPeriod);
   const oneFundingPeriodInBlocks = (24 * 24 * 60 * 60) / 6;
-  const currentFundingPeriode = diffCurrentBlock % oneFundingPeriodInBlocks;
+  const currentFundingPeriode =
+    oneFundingPeriodInBlocks - (diffCurrentBlock % oneFundingPeriodInBlocks);
   console.log(
     diffCurrentBlock,
     oneFundingPeriodInBlocks,
