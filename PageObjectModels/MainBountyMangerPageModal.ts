@@ -22,7 +22,8 @@ export class MainBountyPage {
     );
     this.newBountyButton = page.getByRole("button", { name: "NEW BOUNTY" });
     this.bountyManagerLogo = page.getByRole("button", {
-      name: "88D4FD0B-8452-417A-9EEF-",
+      name: "Logo",
+      exact: true,
     });
     this.showAllBounties = page.getByLabel("all bounties");
     this.showALLOptions = page.getByLabel("all options");
