@@ -90,7 +90,7 @@ test("Curator Proposal", async ({ webPage, context }) => {
   await signTransaction(context, signCuratorRole);
 });
 
-test("Accept Curator Role", async ({ webPage, context }) => {
+test.only("Accept Curator Role", async ({ webPage, context }) => {
   const mbp = new MainBountyPage(webPage);
   const cbp = new CreateBountyPage(webPage);
   await mbp.acceptCuratorRole.click();
@@ -101,13 +101,3 @@ test("Accept Curator Role", async ({ webPage, context }) => {
   await webPage.locator(".fill-white").click();
   await expect(mbp.extendBounty).toBeVisible();
 });
-
-// test.describe("Wallet Tests", () => {
-//   test.use({
-//     walletDetails: {
-//       descriptiveName: "Curator",
-//       password: process.env.POLKADOT_WALLET_PASSWORD,
-//       secretKey: process.env.CURATOR_SECRET_KEY,
-//     },
-//   });
-// });
