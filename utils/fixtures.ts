@@ -45,7 +45,7 @@ export const test = base.extend<{
   },
   walletDetails: async ({}, use) => {
     await use({
-      descriptiveName: "test",
+      descriptiveName: "PLAYWRIGHT",
       password: process.env.POLKADOT_WALLET_PASSWORD,
       secretKey: process.env.POLKADOT_WALLET_SECRET_KEY,
     });

@@ -76,7 +76,6 @@ test("Curator Proposal", async ({ webPage, context }) => {
   await webPage.waitForTimeout(3000);
   await forwardInHours(4, 1);
   await forwardInDays(28);
-  await webPage.pause();
   await forwardInDays(7);
   await forwardInBlocks(2);
   await forwardInDays(1, 2);
@@ -90,7 +89,7 @@ test("Curator Proposal", async ({ webPage, context }) => {
   await signTransaction(context, signCuratorRole);
 });
 
-test.only("Accept Curator Role", async ({ webPage, context }) => {
+test("Accept Curator Role", async ({ webPage, context }) => {
   const mbp = new MainBountyPage(webPage);
   const cbp = new CreateBountyPage(webPage);
   await mbp.acceptCuratorRole.click();

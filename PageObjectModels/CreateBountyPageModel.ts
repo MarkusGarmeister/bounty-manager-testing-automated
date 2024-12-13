@@ -22,7 +22,7 @@ export class CreateBountyPage {
     this.transactionFees = page.locator("p.value").nth(1);
     this.cancelButton = page.getByRole("link", { name: "CANCEL" });
     this.submitButton = page.getByRole("button", { name: "SUBMIT" });
-    this.proceedButton = page.getByRole("button", { name: "PROCEED" });
+    this.proceedButton = page.getByRole("link", { name: "PROCEED" });
     this.curatorAddress = page.getByRole("textbox").first();
     this.curatorFee = page.getByPlaceholder("0");
     this.treasuryTrack = page.locator("#spenders").nth(1);

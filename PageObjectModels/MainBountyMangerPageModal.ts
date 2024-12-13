@@ -26,7 +26,7 @@ export class MainBountyPage {
     this.showALLOptions = page.getByLabel("all options");
     this.bountyHeader = page.locator("span.text-xl.lg\\:text-2xl");
     this.bountyStatus = page.locator("section > p:nth-child(2)");
-    this.curatorPropsalButton = page.getByRole("button", { name: "PROPOSE" });
+    this.curatorPropsalButton = page.getByRole("link", { name: "PROPOSE" });
     this.acceptCuratorRole = page.getByRole("button", { name: "ACCEPT" });
     this.extendBounty = page.getByRole("button", { name: "EXTEND" });
   }
