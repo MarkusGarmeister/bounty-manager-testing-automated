@@ -21,7 +21,10 @@ export class MainBountyPage {
       "Logos/polkadot-js-wallet 2 Polkadot.js Connect Buttons/Back"
     );
     this.newBountyButton = page.getByRole("link", { name: "NEW BOUNTY" });
-    this.bountyManagerLogo = page.getByRole("link", { name: "Logo" });
+    this.bountyManagerLogo = page.getByRole("link", {
+      name: "Logo",
+      exact: true,
+    });
     this.showAllBounties = page.getByLabel("all bounties");
     this.showALLOptions = page.getByLabel("all options");
     this.bountyHeader = page.locator("span.text-xl.lg\\:text-2xl");

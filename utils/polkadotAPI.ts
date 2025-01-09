@@ -1,4 +1,3 @@
-import { KeyringPair } from "@kiltprotocol/sdk-js";
 import { ApiPromise, WsProvider, Keyring } from "@polkadot/api";
 
 let api: ApiPromise;
@@ -35,21 +34,22 @@ export async function getLatestReferendaId() {
   const referendaCountString = referendaCount?.toString();
   const referendaCountNumber = Number(referendaCountString?.replace(",", ""));
   const latestReferenda = referendaCountNumber - 1;
+  console.log(latestReferenda);
 
   return latestReferenda;
 }
 
 // places the Decision Deposite and needs to be done after creating a bounty or proposing a curator
 export async function placeDecisionDeposit() {
-  console.log("I start deposite");
   const keyring = new Keyring({ type: "sr25519" });
   const sender = keyring.addFromMnemonic(
     "grace world memory render hub effort wisdom thumb panther cause trophy fuel"
   );
+  // const sender = keyring.addFromUri("//Alice");
   const referendaCount = (
     await api.query.referenda.referendumCount()
   ).toHuman();
-
+  console.log(referendaCount);
   const referendaCountString = referendaCount?.toString();
   const referendaCountNumber = Number(referendaCountString?.replace(",", ""));
   const index = referendaCountNumber - 1;
@@ -58,6 +58,8 @@ export async function placeDecisionDeposit() {
       .placeDecisionDeposit(index)
       .signAndSend(sender, (result) => {
         console.log(`Transaction status: ${result.status}`);
+        console.log(sender.address);
+
         if (result.status.isInBlock || result.status.isFinalized) {
           console.log("Transaction included in block");
           unsub(); // Unsubscribe after completion
