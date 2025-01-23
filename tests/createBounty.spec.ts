@@ -15,12 +15,15 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-test.only("Creates Bounty and fowards it to status funded", async ({
+test("Creates Bounty and fowards it to status funded", async ({
   webPage,
   context,
 }) => {
   const mbp = new MainBountyPage(webPage);
   const cbp = new CreateBountyPage(webPage);
+  await webPage.pause();
+  await mbp.menu.waitFor();
+  await mbp.menu.click();
   await mbp.newBountyButton.waitFor();
   await mbp.newBountyButton.click();
   const title = "This is a test Bounty";
@@ -84,7 +87,7 @@ test("Curator Proposal", async ({ webPage, context }) => {
   await webPage.reload();
   await expect(mbp.acceptCuratorRole).toBeVisible();
   await mbp.acceptCuratorRole.click();
-  await webPage.locator("button.toggle div.switch").click();
+  await webPage.getByLabel("I agree").click();
   const signCuratorRole = webPage.getByRole("button", { name: "SIGN" });
   await signTransaction(context, signCuratorRole);
 });
@@ -93,7 +96,7 @@ test("Accept Curator Role", async ({ webPage, context }) => {
   const mbp = new MainBountyPage(webPage);
   const cbp = new CreateBountyPage(webPage);
   await mbp.acceptCuratorRole.click();
-  await webPage.locator("button.toggle div.switch").click();
+  await webPage.getByLabel("I agree").click();
   const signCuratorRole = webPage.getByRole("button", { name: "SIGN" });
   await signTransaction(context, signCuratorRole);
   await webPage.waitForTimeout(2000);

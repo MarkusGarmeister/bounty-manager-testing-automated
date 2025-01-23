@@ -13,6 +13,13 @@ export class MainBountyPage {
   readonly curatorPropsalButton: Locator;
   readonly acceptCuratorRole: Locator;
   readonly extendBounty: Locator;
+  readonly bountyContainer: Locator;
+  readonly bountiesPerPage: Locator;
+  readonly tenBountiesPerPage: Locator;
+  readonly fiveBountiesPerPage: Locator;
+  readonly fifteenBountiesPerPage: Locator;
+  readonly twentyBountiesPerPage: Locator;
+  readonly menu: Locator;
 
   constructor(page: Page) {
     this.page = page;
@@ -22,8 +29,7 @@ export class MainBountyPage {
     );
     this.newBountyButton = page.getByRole("link", { name: "NEW BOUNTY" });
     this.bountyManagerLogo = page.getByRole("link", {
-      name: "Logo",
-      exact: true,
+      name: "Logo Bounty Manager",
     });
     this.showAllBounties = page.getByLabel("all bounties");
     this.showALLOptions = page.getByLabel("all options");
@@ -31,6 +37,28 @@ export class MainBountyPage {
     this.bountyStatus = page.locator("section > p:nth-child(2)");
     this.curatorPropsalButton = page.getByRole("link", { name: "PROPOSE" });
     this.acceptCuratorRole = page.getByRole("button", { name: "ACCEPT" });
+    this.bountyContainer = page.locator(
+      'div[data-pagination-scroll^="bounty-"]'
+    );
+
     this.extendBounty = page.getByRole("button", { name: "EXTEND" });
+    this.bountiesPerPage = page.locator('#menu-button[aria-expanded="true"]');
+    this.tenBountiesPerPage = page.getByRole("menuitem", {
+      name: "10",
+      exact: true,
+    });
+    this.fiveBountiesPerPage = page.getByRole("menuitem", {
+      name: "5",
+      exact: true,
+    });
+    this.fifteenBountiesPerPage = page.getByRole("menuitem", {
+      name: "15",
+      exact: true,
+    });
+    this.twentyBountiesPerPage = page.getByRole("menuitem", {
+      name: "5",
+      exact: true,
+    });
+    this.menu = page.getByRole("button", { name: "menu" });
   }
 }
