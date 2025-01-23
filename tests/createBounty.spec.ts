@@ -15,7 +15,7 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-test.only("Creates Bounty and fowards it to status funded", async ({
+test("Creates Bounty and fowards it to status funded", async ({
   webPage,
   context,
 }) => {
@@ -46,7 +46,8 @@ test.only("Creates Bounty and fowards it to status funded", async ({
   const fundingPeriod = await getFundingPeriod(); // returns the blocks until funding Period is finished
   await forwardInBlocks(fundingPeriod); // funding period ended and bounty is funded
   await webPage.waitForTimeout(1000);
-  await webPage.locator(".fill-white").click();
+  await webPage.getByRole('button', { name: 'Close icon' }).click();
+  await webPage.getByRole('link', { name: 'RETURN HOME' }).click();
   await mbp.bountyManagerLogo.waitFor();
   await mbp.bountyManagerLogo.click();
   await webPage.reload();
@@ -81,7 +82,7 @@ test("Curator Proposal", async ({ webPage, context }) => {
   await forwardInDays(7);
   await forwardInBlocks(2);
   await forwardInDays(1, 2);
-  await webPage.locator(".fill-white").click();
+  await webPage.getByRole('button', { name: 'Close icon' }).click();
   await mbp.bountyManagerLogo.click();
   await webPage.reload();
   await expect(mbp.acceptCuratorRole).toBeVisible();
