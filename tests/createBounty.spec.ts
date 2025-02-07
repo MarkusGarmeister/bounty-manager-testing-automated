@@ -15,17 +15,6 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-test.use({
-  walletDetails: [
-    {
-      descriptiveName: "Test",
-      password: process.env.POLKADOT_WALLET_PASSWORD,
-      secretKey:
-        "oblige skill discover coin salad peanut history ocean hip debate hard detail",
-    },
-  ],
-});
-
 test.only("Creates Bounty and fowards it to status funded", async ({
   webPage,
   context,

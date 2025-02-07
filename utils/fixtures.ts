@@ -65,8 +65,6 @@ export const test = base.extend<{
     ]);
   },
   webPage: async ({ page, extensionId, context, walletDetails }, use) => {
-    console.log("walletDetails is:", walletDetails);
-    console.log("Is array?", Array.isArray(walletDetails));
     await page.goto(`chrome-extension://${extensionId}/index.html`);
 
     await importWallet(page, walletDetails);
