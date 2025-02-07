@@ -12,7 +12,7 @@
     "@types/node": "^22.7.9"
   },
   "dependencies": {
-    "@polkadot/api": "^14.1.1",
+    "@polkadot/api": "^15.5.2",
     "dotenv": "^16.4.5"
   }
 }

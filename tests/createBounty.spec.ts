@@ -15,13 +15,23 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-test("Creates Bounty and fowards it to status funded", async ({
+test.use({
+  walletDetails: [
+    {
+      descriptiveName: "Test",
+      password: process.env.POLKADOT_WALLET_PASSWORD,
+      secretKey:
+        "oblige skill discover coin salad peanut history ocean hip debate hard detail",
+    },
+  ],
+});
+
+test.only("Creates Bounty and fowards it to status funded", async ({
   webPage,
   context,
 }) => {
   const mbp = new MainBountyPage(webPage);
   const cbp = new CreateBountyPage(webPage);
-  await webPage.pause();
   await mbp.menu.waitFor();
   await mbp.menu.click();
   await mbp.newBountyButton.waitFor();

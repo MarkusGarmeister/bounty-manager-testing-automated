@@ -43,7 +43,7 @@ export async function getLatestReferendaId() {
 export async function placeDecisionDeposit() {
   const keyring = new Keyring({ type: "sr25519" });
   const sender = keyring.addFromMnemonic(
-    "grace world memory render hub effort wisdom thumb panther cause trophy fuel"
+    process.env.POLKADOT_WALLET_SECRET_KEY
   );
   // const sender = keyring.addFromUri("//Alice");
   const referendaCount = (
