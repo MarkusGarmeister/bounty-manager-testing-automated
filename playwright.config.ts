@@ -12,6 +12,11 @@ import { defineConfig, devices } from "@playwright/test";
  * See https://playwright.dev/docs/test-configuration.
  */
 export default defineConfig({
+  globalSetup: '/Users/hendrizeneli/Documents/Test-Projekte/Polkadot/fresh-clone/utils/setup.ts', // Vendos path-in e skedarit, jo një import direkt!
+    use: {
+        headless: false, // Sigurohu që Playwright hap një shfletues me UI
+    },
+
   testDir: "./tests",
   timeout: 40_000,
   /* Run tests in files in parallel */

@@ -13,6 +13,15 @@ export class CreateBountyPage {
   readonly curatorFee: Locator;
   readonly treasuryTrack: Locator;
   readonly spendersDropdown: Locator;
+  readonly creationTab: Locator;
+  readonly approvalTab: Locator;
+  readonly approvalDeposit: Locator;
+  readonly approvalTransactionFees: Locator;
+  readonly firstBounty: Locator;
+  readonly transactionFeeDropdownArrow: Locator;
+  readonly actualFeeLocator: Locator;
+
+
 
   constructor(page: Page) {
     this.page = page;
@@ -25,8 +34,15 @@ export class CreateBountyPage {
     this.proceedButton = page.getByRole("link", { name: "PROCEED" });
     this.curatorAddress = page.getByRole("textbox").first();
     this.curatorFee = page.getByPlaceholder("0");
-    this.treasuryTrack = page.locator("#spenders").nth(1);
+    this.treasuryTrack = page.locator('#menu-button');
     this.spendersDropdown = page.locator("button#menu-button");
+    this.creationTab = page.getByRole('link', { name: 'Creation' });
+    this.approvalTab = page.getByRole('link', { name: 'Approval' });
+    this.approvalDeposit = page.locator('section.space-y-1:has(p.label:text("Deposit")) p:not(.label)');
+    this.approvalTransactionFees = page.locator('section.space-y-1:has(p.label:text("Estimated basic fee")) p:not(.label)');
+    this.firstBounty = page.locator('tbody.ui--Table-Body tr').first();
+    this.transactionFeeDropdownArrow = page.locator('.ui--Expander-summary.isLeft svg[data-testid="caret-down"] path');
+    this.actualFeeLocator = page.locator('.ui--Labelled-content input[disabled]');
   }
 }
 
