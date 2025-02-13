@@ -20,13 +20,17 @@ export class MainBountyPage {
   readonly fifteenBountiesPerPage: Locator;
   readonly twentyBountiesPerPage: Locator;
   readonly menu: Locator;
+  readonly logoutButton: Locator;
+  readonly curatorAddress: Locator;
+  readonly bountyCreatorAddress: Locator;
+  readonly noCreatorAddress: Locator;
 
   constructor(page: Page) {
     this.page = page;
     this.connectWallet = page.getByRole("button", { name: "Connect Wallet" });
-    this.polkadotConnect = page.getByText(
-      "Logos/polkadot-js-wallet 2 Polkadot.js Connect Buttons/Back"
-    );
+    this.polkadotConnect = page.getByRole("button", {
+      name: "Logo Polkadot.js Connect",
+    });
     this.newBountyButton = page.getByRole("link", { name: "NEW BOUNTY" });
     this.bountyManagerLogo = page.getByRole("link", {
       name: "Logo Bounty Manager",
@@ -60,5 +64,9 @@ export class MainBountyPage {
       exact: true,
     });
     this.menu = page.getByRole("button", { name: "menu" });
+    this.logoutButton = page.getByRole('button', { name: 'Log out logout' });
+    this.curatorAddress = page.getByRole('button', { name: 'Curator 15mLgX2Xy9W2MkvSYi3r' });
+    this.bountyCreatorAddress = page.getByRole('button', { name: 'Bounty Creator' });
+    this.noCreatorAddress = page.getByRole('button', { name: 'No Creator' });
   }
 }

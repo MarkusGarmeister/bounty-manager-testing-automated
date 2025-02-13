@@ -20,6 +20,7 @@ export class CreateBountyPage {
   readonly firstBounty: Locator;
   readonly transactionFeeDropdownArrow: Locator;
   readonly actualFeeLocator: Locator;
+  readonly firstBountyHeader: Locator;
 
 
 
@@ -43,6 +44,7 @@ export class CreateBountyPage {
     this.firstBounty = page.locator('tbody.ui--Table-Body tr').first();
     this.transactionFeeDropdownArrow = page.locator('.ui--Expander-summary.isLeft svg[data-testid="caret-down"] path');
     this.actualFeeLocator = page.locator('.ui--Labelled-content input[disabled]');
+    this.firstBountyHeader = page.locator('.text-white .flex.justify-between .flex.flex-col.lg\\:flex-row.lg\\:justify-start span.text-xl').first();
   }
 }
 

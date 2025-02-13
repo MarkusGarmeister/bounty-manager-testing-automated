@@ -25,7 +25,7 @@ export const test = base.extend<{
   }[];
   webPage: Page;
 }>({
-  context: async ({}, use) => {
+  context: async ({ }, use) => {
     const pathToExtension = path.join(__dirname, "PolkadotWallet");
     const context = await chromium.launchPersistentContext("", {
       headless: false,
@@ -44,24 +44,24 @@ export const test = base.extend<{
     const extensionId = background.url().split("/")[2];
     await use(extensionId);
   },
-  walletDetails: async ({}, use) => {
+  walletDetails: async ({ }, use) => {
     await use([
       {
         descriptiveName: "Bounty Creator",
         password: process.env.POLKADOT_WALLET_PASSWORD,
         secretKey: process.env.POLKADOT_WALLET_SECRET_KEY,
       },
-      // Needs to be configured
-      // {
-      //   descriptiveName: "Curator",
-      //   password: process.env.POLKADOT_WALLET_PASSWORD,
-      //   secretKey: process.env.POLKADOT_WALLET_SECRET_KEY,
-      // },
-      // {
-      //   descriptiveName: "No Creator",
-      //   password: process.env.POLKADOT_WALLET_PASSWORD,
-      //   secretKey: process.env.POLKADOT_WALLET_SECRET_KEY,
-      // },
+
+      {
+        descriptiveName: "Curator",
+        password: process.env.POLKADOT_WALLET_PASSWORD,
+        secretKey: process.env.CURATOR_WALLET_SECRET_KEY,
+      },
+      {
+        descriptiveName: "No Creator",
+        password: process.env.POLKADOT_WALLET_PASSWORD,
+        secretKey: process.env.NOT_CURATOR_SECTRET_KEY,
+      },
     ]);
   },
   webPage: async ({ page, extensionId, context, walletDetails }, use) => {
@@ -94,7 +94,7 @@ export const test = base.extend<{
       .click();
     await walletPage.locator(".acceptButton").click();
     console.log(`${walletDetails[0].descriptiveName}`);
-    await page.getByText(`${walletDetails[0].descriptiveName}`).click();
+    await page.getByText(`${walletDetails[0].descriptiveName}`, { exact: true }).click();
     await use(page);
   },
 });
