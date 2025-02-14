@@ -1,22 +1,6 @@
 import { defineConfig, devices } from "@playwright/test";
 
-/**
- * Read environment variables from file.
- * https://github.com/motdotla/dotenv
- */
-// import dotenv from 'dotenv';
-// import path from 'path';
-// dotenv.config({ path: path.resolve(__dirname, '.env') });
-
-/**
- * See https://playwright.dev/docs/test-configuration.
- */
 export default defineConfig({
-  globalSetup: '/Users/hendrizeneli/Documents/Test-Projekte/Polkadot/fresh-clone/utils/setup.ts', // Vendos path-in e skedarit, jo një import direkt!
-    use: {
-        headless: false, // Sigurohu që Playwright hap një shfletues me UI
-    },
-
   testDir: "./tests",
   timeout: 40_000,
   /* Run tests in files in parallel */
@@ -27,14 +11,39 @@ export default defineConfig({
   retries: process.env.CI ? 2 : 0,
   /* Opt out of parallel tests on CI. */
   workers: process.env.CI ? 1 : undefined,
-  /* Reporter to use. See https://playwright.dev/docs/test-reporters */
-  reporter: [["line"], ["junit", { outputFile: "test-results/results.xml" }]],
-  /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
-  use: {
-    /* Base URL to use in actions like `await page.goto('/')`. */
-    // baseURL: 'http://127.0.0.1:3000',
 
-    /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
+  /* Reporter configuration */
+  reporter: [
+    ["line"],
+    ["junit", { outputFile: "test-results/results.xml" }],
+    [
+      "playwright-xray",
+      {
+        jira: {
+          url: "https://sqf.atlassian.net/",
+          type: "cloud",
+          apiVersion: "1.0",
+        },
+        cloud: {
+          client_id: "A777E961919A4F20BADE10B31811909C",
+          client_secret: "40fdb2f7f7d88f192a3ed9fc47ea4f0329829c65a2ecf428ec50c27ca8f47366",
+          xrayUrl: 'https://eu.xray.cloud.getxray.app/'
+        },
+        projectKey: "BM",
+        testPlan: "BM-93",
+        debug: false,
+        uploadScreenShot: true,
+        uploadTrace: true,
+        uploadVideo: true,
+        summary: `[${new Date().toLocaleString("de-DE", { timeZone: "Europe/Berlin" })}] - Automated Test Run`,
+        dryRun: false, 
+      },
+    ],
+  ],
+
+  /* Shared settings for all projects */
+  use: {
+    /* Collect trace when retrying the failed test */
     trace: "on-first-retry",
   },
 
@@ -42,53 +51,15 @@ export default defineConfig({
   projects: [
     {
       name: "chrome",
-      use: { ...devices["Desktop Firefox"] },
+      use: { ...devices["Desktop Chrome"] }, // Korrigjim: Përdor Desktop Chrome
     },
-
     // {
-    //   name: 'setup',
-    //   use: { ...devices['Desktop Chrome'] },
-    //   testMatch: /.*\.setup\.ts/,
-    // },
-
-    // {
-    //   name: 'afterSetup',
-    //   use: {
-    //     ...devices['Desktop Chrome'],
-    //     storageState: ".auth/loginWallet.json"
-    //   },
-
-    //   dependencies: ["setup"],
-    // },
-
-    // {
-    //   name: 'firefox',
-    //   use: { ...devices['Desktop Firefox'] },
-    // },
-
-    // {
-    //   name: 'webkit',
-    //   use: { ...devices['Desktop Safari'] },
-    // },
-
-    /* Test against mobile viewports. */
-    // {
-    //   name: 'Mobile Chrome',
-    //   use: { ...devices['Pixel 5'] },
+    //   name: "firefox",
+    //   use: { ...devices["Desktop Firefox"] },
     // },
     // {
-    //   name: 'Mobile Safari',
-    //   use: { ...devices['iPhone 12'] },
-    // },
-
-    /* Test against branded browsers. */
-    // {
-    //   name: 'Microsoft Edge',
-    //   use: { ...devices['Desktop Edge'], channel: 'msedge' },
-    // },
-    // {
-    //   name: 'Google Chrome',
-    //   use: { ...devices['Desktop Chrome'], channel: 'chrome' },
+    //   name: "webkit",
+    //   use: { ...devices["Desktop Safari"] },
     // },
   ],
 

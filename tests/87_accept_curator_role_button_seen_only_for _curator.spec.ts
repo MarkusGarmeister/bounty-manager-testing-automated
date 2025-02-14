@@ -16,7 +16,7 @@ import dotenv from "dotenv";
 dotenv.config();
 
   
-test("Creates Bounty and fowards it to status funded", async ({
+test("BM-87 | Creates Bounty and fowards it to status funded", async ({
     webPage,
     context,
 }) => {
@@ -102,7 +102,7 @@ test("Creates Bounty and fowards it to status funded", async ({
 });
 
 
-test("Curator Proposal", async ({ webPage, context }) => {
+test("BM-87 | Curator Proposal", async ({ webPage, context }) => {
     const mbp = new MainBountyPage(webPage);
     const cbp = new CreateBountyPage(webPage);
 
@@ -161,5 +161,5 @@ test("Curator Proposal", async ({ webPage, context }) => {
     await mbp.curatorAddress.click();
     await mbp.bountyManagerLogo.click();
     await expect(mbp.acceptCuratorRole).not.toBeVisible();
-    
+
 });

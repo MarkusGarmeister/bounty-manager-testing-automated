@@ -16,7 +16,7 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-test("Creates Bounty and fowards it to status funded", async ({
+test("BM-85 | Creates Bounty and fowards it to status funded", async ({
     webPage,
     context,
   }) => {

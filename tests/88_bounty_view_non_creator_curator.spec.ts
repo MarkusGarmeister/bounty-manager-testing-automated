@@ -17,7 +17,7 @@ dotenv.config();
 
 
 
-test("Creates Bounty and fowards it to status funded", async ({
+test("BM-88 | Creates Bounty and fowards it to status funded", async ({
     webPage,
     context,
 }) => {
@@ -103,7 +103,7 @@ test("Creates Bounty and fowards it to status funded", async ({
 
 
 
-test("Curator Proposal", async ({ webPage, context }) => {
+test("BM-88 | Curator Proposal", async ({ webPage, context }) => {
     const mbp = new MainBountyPage(webPage);
     const cbp = new CreateBountyPage(webPage);
 

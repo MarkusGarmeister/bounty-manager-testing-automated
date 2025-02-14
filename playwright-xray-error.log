@@ -1,0 +1,57 @@
+Config: {
+  transitional: {
+    silentJSONParsing: true,
+    forcedJSONParsing: true,
+    clarifyTimeoutError: false
+  },
+  adapter: [ 'xhr', 'http', 'fetch' ],
+  transformRequest: [ [Function: transformRequest] ],
+  transformResponse: [ [Function: transformResponse] ],
+  timeout: 600000,
+  xsrfCookieName: 'XSRF-TOKEN',
+  xsrfHeaderName: 'X-XSRF-TOKEN',
+  maxContentLength: 107374182400,
+  maxBodyLength: 107374182400,
+  env: {
+    FormData: [Function: FormData] {
+      LINE_BREAK: '\r\n',
+      DEFAULT_CONTENT_TYPE: 'application/octet-stream'
+    },
+    Blob: [class Blob]
+  },
+  validateStatus: [Function: validateStatus],
+  headers: Object [AxiosHeaders] {
+    Accept: 'application/json, text/plain, */*',
+    'Content-Type': 'application/json',
+    options: '[object Object]',
+    Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0ZW5hbnQiOiI3YWEzYzljOS1mMjE5LTMyMjMtODZiNi1iM2FiMTRmYmIyNjkiLCJhY2NvdW50SWQiOiI1NTcwNTg6MmQ4NTIxNzEtODI4Ny00ZWIyLWJiYmUtYmRiMWI5MzczYWQ1IiwiaXNYZWEiOmZhbHNlLCJpYXQiOjE3Mzk0NjMyNjMsImV4cCI6MTczOTU0OTY2MywiYXVkIjoiQTc3N0U5NjE5MTlBNEYyMEJBREUxMEIzMTgxMTkwOUMiLCJpc3MiOiJjb20ueHBhbmRpdC5wbHVnaW5zLnhyYXkiLCJzdWIiOiJBNzc3RTk2MTkxOUE0RjIwQkFERTEwQjMxODExOTA5QyJ9.ZXS2Ou9QFai95Os7lHvtfqv8ih4FjirieBHsIIpIXK8',
+    'User-Agent': 'axios/1.7.9',
+    'Content-Length': '2313',
+    'Accept-Encoding': 'gzip, compress, deflate, br'
+  },
+  baseURL: 'https://xray.cloud.getxray.app/',
+  proxy: false,
+  method: 'post',
+  url: 'https://xray.cloud.getxray.app/api/v2/import/execution',
+  data: '{"info":{"summary":"[13.2.2025, 17:14:23] - Automated Test Run","project":"BM","startDate":"2025-02-13T16:14:23.069Z","finishDate":"2025-02-13T16:14:23.069Z","testPlanKey":"BM-93"},"tests":[{"status":"PASSED","testKey":"BM-84","evidence":[],"start":"2025-02-13T16:14:23.933Z","finish":"2025-02-13T16:14:39.502Z","steps":[{"status":"PASSED","comment":"","actualResult":""},{"status":"PASSED","comment":"","actualResult":""},{"status":"PASSED","comment":"","actualResult":""},{"status":"PASSED","comment":"","actualResult":""},{"status":"PASSED","comment":"","actualResult":""},{"status":"PASSED","comment":"","actualResult":""},{"status":"PASSED","comment":"","actualResult":""},{"status":"PASSED","comment":"","actualResult":""},{"status":"PASSED","comment":"","actualResult":""},{"status":"PASSED","comment":"","actualResult":""},{"status":"PASSED","comment":"","actualResult":""},{"status":"PASSED","comment":"","actualResult":""},{"status":"PASSED","comment":"","actualResult":""},{"status":"PASSED","comment":"","actualResult":""},{"status":"PASSED","comment":"","actualResult":""},{"status":"PASSED","comment":"","actualResult":""},{"status":"PASSED","comment":"","actualResult":""},{"status":"PASSED","comment":"","actualResult":""},{"status":"PASSED","comment":"","actualResult":""},{"status":"PASSED","comment":"","actualResult":""},{"status":"PASSED","comment":"","actualResult":""},{"status":"PASSED","comment":"","actualResult":""},{"status":"PASSED","comment":"","actualResult":""},{"status":"PASSED","comment":"","actualResult":""},{"status":"PASSED","comment":"","actualResult":""},{"status":"PASSED","comment":"","actualResult":""},{"status":"PASSED","comment":"","actualResult":""},{"status":"PASSED","comment":"","actualResult":""},{"status":"PASSED","comment":"","actualResult":""},{"status":"PASSED","comment":"","actualResult":""},{"status":"PASSED","comment":"","actualResult":""},{"status":"PASSED","comment":"","actualResult":""},{"status":"PASSED","comment":"","actualResult":""},{"status":"PASSED","comment":"","actualResult":""},{"status":"PASSED","comment":"","actualResult":""},{"status":"PASSED","comment":"","actualResult":""},{"status":"PASSED","comment":"","actualResult":""},{"status":"PASSED","comment":"","actualResult":""},{"status":"PASSED","comment":"","actualResult":""}]}]}'
+}
+
+Status: 401
+Headers: Object [AxiosHeaders] {
+  'content-type': 'text/html; charset=utf-8',
+  'content-length': '99',
+  connection: 'keep-alive',
+  'cache-control': 'no-store, no-cache, must-revalidate, proxy-revalidate',
+  date: 'Thu, 13 Feb 2025 16:14:40 GMT',
+  etag: 'W/"63-hd6ph6pWrosMY9KIJ6qvBYPlQws"',
+  expires: '0',
+  pragma: 'no-cache',
+  'surrogate-control': 'no-store',
+  'x-cache': 'Error from cloudfront',
+  via: '1.1 6b2d62d60926d8d51fdcbcc94fce643a.cloudfront.net (CloudFront)',
+  'x-amz-cf-pop': 'DUS51-P1',
+  'x-amz-cf-id': 'uxYk4HB_gTCAceKITUPhDmUbjvqSc8UXw2CuSPSr8NEP5V_i79rSaA=='
+}
+Data: {
+  error: 'Xray data is in another region. Contact support to migrate Xray data to current region.'
+}

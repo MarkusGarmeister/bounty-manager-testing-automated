@@ -9,7 +9,8 @@
   "description": "",
   "devDependencies": {
     "@playwright/test": "^1.48.1",
-    "@types/node": "^22.7.9"
+    "@types/node": "^22.7.9",
+    "playwright-xray": "^0.6.11"
   },
   "dependencies": {
     "@polkadot/api": "^15.5.2",
