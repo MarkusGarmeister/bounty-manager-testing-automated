@@ -24,34 +24,32 @@ Config: {
     Accept: 'application/json, text/plain, */*',
     'Content-Type': 'application/json',
     options: '[object Object]',
-    Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0ZW5hbnQiOiI3YWEzYzljOS1mMjE5LTMyMjMtODZiNi1iM2FiMTRmYmIyNjkiLCJhY2NvdW50SWQiOiI1NTcwNTg6MmQ4NTIxNzEtODI4Ny00ZWIyLWJiYmUtYmRiMWI5MzczYWQ1IiwiaXNYZWEiOmZhbHNlLCJpYXQiOjE3Mzk0NjMyNjMsImV4cCI6MTczOTU0OTY2MywiYXVkIjoiQTc3N0U5NjE5MTlBNEYyMEJBREUxMEIzMTgxMTkwOUMiLCJpc3MiOiJjb20ueHBhbmRpdC5wbHVnaW5zLnhyYXkiLCJzdWIiOiJBNzc3RTk2MTkxOUE0RjIwQkFERTEwQjMxODExOTA5QyJ9.ZXS2Ou9QFai95Os7lHvtfqv8ih4FjirieBHsIIpIXK8',
+    Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0ZW5hbnQiOiI3YWEzYzljOS1mMjE5LTMyMjMtODZiNi1iM2FiMTRmYmIyNjkiLCJhY2NvdW50SWQiOiI1NTcwNTg6MmQ4NTIxNzEtODI4Ny00ZWIyLWJiYmUtYmRiMWI5MzczYWQ1IiwiaXNYZWEiOmZhbHNlLCJpYXQiOjE3NDAxMzk5MjgsImV4cCI6MTc0MDIyNjMyOCwiYXVkIjoiQTc3N0U5NjE5MTlBNEYyMEJBREUxMEIzMTgxMTkwOUMiLCJpc3MiOiJjb20ueHBhbmRpdC5wbHVnaW5zLnhyYXkiLCJzdWIiOiJBNzc3RTk2MTkxOUE0RjIwQkFERTEwQjMxODExOTA5QyJ9.jB5vzdzCmq_bhTIkJTyCuGfx0hXv3QQhHi22M_ScSrM',
     'User-Agent': 'axios/1.7.9',
-    'Content-Length': '2313',
+    'Content-Length': '3045',
     'Accept-Encoding': 'gzip, compress, deflate, br'
   },
-  baseURL: 'https://xray.cloud.getxray.app/',
+  baseURL: 'https://eu.xray.cloud.getxray.app/',
   proxy: false,
   method: 'post',
-  url: 'https://xray.cloud.getxray.app/api/v2/import/execution',
-  data: '{"info":{"summary":"[13.2.2025, 17:14:23] - Automated Test Run","project":"BM","startDate":"2025-02-13T16:14:23.069Z","finishDate":"2025-02-13T16:14:23.069Z","testPlanKey":"BM-93"},"tests":[{"status":"PASSED","testKey":"BM-84","evidence":[],"start":"2025-02-13T16:14:23.933Z","finish":"2025-02-13T16:14:39.502Z","steps":[{"status":"PASSED","comment":"","actualResult":""},{"status":"PASSED","comment":"","actualResult":""},{"status":"PASSED","comment":"","actualResult":""},{"status":"PASSED","comment":"","actualResult":""},{"status":"PASSED","comment":"","actualResult":""},{"status":"PASSED","comment":"","actualResult":""},{"status":"PASSED","comment":"","actualResult":""},{"status":"PASSED","comment":"","actualResult":""},{"status":"PASSED","comment":"","actualResult":""},{"status":"PASSED","comment":"","actualResult":""},{"status":"PASSED","comment":"","actualResult":""},{"status":"PASSED","comment":"","actualResult":""},{"status":"PASSED","comment":"","actualResult":""},{"status":"PASSED","comment":"","actualResult":""},{"status":"PASSED","comment":"","actualResult":""},{"status":"PASSED","comment":"","actualResult":""},{"status":"PASSED","comment":"","actualResult":""},{"status":"PASSED","comment":"","actualResult":""},{"status":"PASSED","comment":"","actualResult":""},{"status":"PASSED","comment":"","actualResult":""},{"status":"PASSED","comment":"","actualResult":""},{"status":"PASSED","comment":"","actualResult":""},{"status":"PASSED","comment":"","actualResult":""},{"status":"PASSED","comment":"","actualResult":""},{"status":"PASSED","comment":"","actualResult":""},{"status":"PASSED","comment":"","actualResult":""},{"status":"PASSED","comment":"","actualResult":""},{"status":"PASSED","comment":"","actualResult":""},{"status":"PASSED","comment":"","actualResult":""},{"status":"PASSED","comment":"","actualResult":""},{"status":"PASSED","comment":"","actualResult":""},{"status":"PASSED","comment":"","actualResult":""},{"status":"PASSED","comment":"","actualResult":""},{"status":"PASSED","comment":"","actualResult":""},{"status":"PASSED","comment":"","actualResult":""},{"status":"PASSED","comment":"","actualResult":""},{"status":"PASSED","comment":"","actualResult":""},{"status":"PASSED","comment":"","actualResult":""},{"status":"PASSED","comment":"","actualResult":""}]}]}'
+  url: 'https://eu.xray.cloud.getxray.app/api/v2/import/execution',
+  data: '{"info":{"summary":"[20.2.2025, 11:44:45] - Automated Test Run","project":"BM","startDate":"2025-02-21T12:12:08.765Z","finishDate":"2025-02-21T12:12:08.765Z","testPlanKey":"BM-93"},"tests":[{"status":"PASSED","testKey":"BM-89 BM-90 BM-91 BM-92","evidence":[],"start":"2025-02-21T12:12:09.745Z","finish":"2025-02-21T12:12:36.846Z","steps":[{"status":"PASSED","comment":"","actualResult":""},{"status":"PASSED","comment":"","actualResult":""},{"status":"PASSED","comment":"","actualResult":""},{"status":"PASSED","comment":"","actualResult":""},{"status":"PASSED","comment":"","actualResult":""},{"status":"PASSED","comment":"","actualResult":""},{"status":"PASSED","comment":"","actualResult":""},{"status":"PASSED","comment":"","actualResult":""},{"status":"PASSED","comment":"","actualResult":""},{"status":"PASSED","comment":"","actualResult":""},{"status":"PASSED","comment":"","actualResult":""},{"status":"PASSED","comment":"","actualResult":""},{"status":"PASSED","comment":"","actualResult":""},{"status":"PASSED","comment":"","actualResult":""},{"status":"PASSED","comment":"","actualResult":""},{"status":"PASSED","comment":"","actualResult":""},{"status":"PASSED","comment":"","actualResult":""},{"status":"PASSED","comment":"","actualResult":""},{"status":"PASSED","comment":"","actualResult":""},{"status":"PASSED","comment":"","actualResult":""},{"status":"PASSED","comment":"","actualResult":""},{"status":"PASSED","comment":"","actualResult":""},{"status":"PASSED","comment":"","actualResult":""},{"status":"PASSED","comment":"","actualResult":""},{"status":"PASSED","comment":"","actualResult":""},{"status":"PASSED","comment":"","actualResult":""},{"status":"PASSED","comment":"","actualResult":""},{"status":"PASSED","comment":"","actualResult":""},{"status":"PASSED","comment":"","actualResult":""},{"status":"PASSED","comment":"","actualResult":""},{"status":"PASSED","comment":"","actualResult":""},{"status":"PASSED","comment":"","actualResult":""},{"status":"PASSED","comment":"","actualResult":""},{"status":"PASSED","comment":"","actualResult":""},{"status":"PASSED","comment":"","actualResult":""},{"status":"PASSED","comment":"","actualResult":""},{"status":"PASSED","comment":"","actualResult":""},{"status":"PASSED","comment":"","actualResult":""},{"status":"PASSED","comment":"","actualResult":""},{"status":"PASSED","comment":"","actualResult":""},{"status":"PASSED","comment":"","actualResult":""},{"status":"PASSED","comment":"","actualResult":""},{"status":"PASSED","comment":"","actualResult":""},{"status":"PASSED","comment":"","actualResult":""},{"status":"PASSED","comment":"","actualResult":""},{"status":"PASSED","comment":"","actualResult":""},{"status":"PASSED","comment":"","actualResult":""},{"status":"PASSED","comment":"","actualResult":""},{"status":"PASSED","comment":"","actualResult":""},{"status":"PASSED","comment":"","actualResult":""},{"status":"PASSED","comment":"","actualResult":""},{"status":"PASSED","comment":"","actualResult":""},{"status":"PASSED","comment":"","actualResult":""}]}]}'
 }
 
-Status: 401
+Status: 400
 Headers: Object [AxiosHeaders] {
-  'content-type': 'text/html; charset=utf-8',
-  'content-length': '99',
-  connection: 'keep-alive',
   'cache-control': 'no-store, no-cache, must-revalidate, proxy-revalidate',
-  date: 'Thu, 13 Feb 2025 16:14:40 GMT',
-  etag: 'W/"63-hd6ph6pWrosMY9KIJ6qvBYPlQws"',
+  'content-type': 'application/json; charset=utf-8',
+  date: 'Fri, 21 Feb 2025 12:13:29 GMT',
+  etag: 'W/"1d-rIFjOV54ngEvbo7/S0h2JZtl4k4"',
   expires: '0',
   pragma: 'no-cache',
+  'retry-after': '32',
   'surrogate-control': 'no-store',
-  'x-cache': 'Error from cloudfront',
-  via: '1.1 6b2d62d60926d8d51fdcbcc94fce643a.cloudfront.net (CloudFront)',
-  'x-amz-cf-pop': 'DUS51-P1',
-  'x-amz-cf-id': 'uxYk4HB_gTCAceKITUPhDmUbjvqSc8UXw2CuSPSr8NEP5V_i79rSaA=='
+  'x-ratelimit-limit': '60',
+  'x-ratelimit-remaining': '58',
+  'x-ratelimit-reset': 'Fri Feb 21 2025 12:13:08 GMT+0000 (Coordinated Universal Time)',
+  'content-length': '29',
+  connection: 'keep-alive'
 }
-Data: {
-  error: 'Xray data is in another region. Contact support to migrate Xray data to current region.'
-}
+Data: { error: 'Invalid JQL query' }

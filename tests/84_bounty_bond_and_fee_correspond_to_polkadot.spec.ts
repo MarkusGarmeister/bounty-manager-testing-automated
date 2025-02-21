@@ -46,7 +46,7 @@ test("BM-84 | Creates Bounty and fowards it to status funded", async ({
     // I click on the Submit button and I sign the transaction
     await signTransaction(context, cbp.submitButton);
     await webPage.waitForTimeout(2000);
-    await webPage.locator(".fill-white").click();
+    await webPage.getByRole('button', { name: 'Close icon' }).click();
 
     // I go to https://polkadot.js.org/apps/?rpc=ws%3A%2F%2Flocalhost%3A8000#/explorer, click on the latest block and find the newly created bounty
 

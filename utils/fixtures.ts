@@ -58,7 +58,7 @@ export const test = base.extend<{
         secretKey: process.env.CURATOR_WALLET_SECRET_KEY,
       },
       {
-        descriptiveName: "No Creator",
+        descriptiveName: "No Curator",
         password: process.env.POLKADOT_WALLET_PASSWORD,
         secretKey: process.env.NOT_CURATOR_SECTRET_KEY,
       },

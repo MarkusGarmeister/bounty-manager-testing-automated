@@ -23,7 +23,11 @@ export class MainBountyPage {
   readonly logoutButton: Locator;
   readonly curatorAddress: Locator;
   readonly bountyCreatorAddress: Locator;
-  readonly noCreatorAddress: Locator;
+  readonly noCuratorAddress: Locator;
+  readonly addChildBountyButton: Locator;
+  readonly assignChildBountyButton: Locator;
+  readonly acceptSubCuratorButton: Locator;
+
 
   constructor(page: Page) {
     this.page = page;
@@ -67,6 +71,10 @@ export class MainBountyPage {
     this.logoutButton = page.getByRole('button', { name: 'Log out logout' });
     this.curatorAddress = page.getByRole('button', { name: 'Curator 15mLgX2Xy9W2MkvSYi3r' });
     this.bountyCreatorAddress = page.getByRole('button', { name: 'Bounty Creator' });
-    this.noCreatorAddress = page.getByRole('button', { name: 'No Creator' });
+    this.noCuratorAddress = page.getByRole('button', { name: 'No Curator' });
+    this.addChildBountyButton = page.getByRole('button', { name: 'ADD' });
+    this.assignChildBountyButton = page.getByRole('button', { name: 'ASSIGN' });
+    this.acceptCuratorRole = page.getByRole('button', { name: 'ACCEPT' });
+    this.acceptSubCuratorButton = page.getByRole('button', { name: 'ACCEPT' });
   }
 }

@@ -15,7 +15,7 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-test("BM-66 | Creates Bounty and fowards it to status funded", async ({
+test("BM-89 | Creates Bounty and fowards it to status funded", async ({
   webPage,
   context,
 }) => {
@@ -56,7 +56,7 @@ test("BM-66 | Creates Bounty and fowards it to status funded", async ({
 
   // I go to the Bounty Manager and click on the "Approval" tab
   await cbp.approvalTab.click();
-  await webPage.waitForTimeout(3000);
+  await webPage.waitForTimeout(2000);
   await expect(cbp.approvalDeposit).toHaveText("1 DOT");
   await expect(cbp.approvalTransactionFees).toHaveText("0.01336 DOT");
   await expect(bountyHeader1).toHaveText(`#${bountyId} ${title}`);
@@ -100,7 +100,7 @@ test("BM-66 | Creates Bounty and fowards it to status funded", async ({
 });
 
 
-test("BM-66 | Curator Proposal", async ({ webPage, context }) => {
+test("BM-89 | Curator Proposal", async ({ webPage, context }) => {
     const mbp = new MainBountyPage(webPage);
     const cbp = new CreateBountyPage(webPage);
 
@@ -160,4 +160,69 @@ test("BM-66 | Curator Proposal", async ({ webPage, context }) => {
     await webPage.getByRole('button', { name: 'Close icon' }).click();
     await expect(mbp.extendBounty).toBeVisible();
 
+    // I press on the Add New Child Bounty
+    await mbp.addChildBountyButton.click();
+    
+
+    // I enter Child Bounty Value and Title and press on Sign button
+    await webPage.getByPlaceholder('Child bounty name').fill('Test child bounty');
+    await webPage.getByPlaceholder('00.00').fill('200');
+    const signChildBoundy = webPage.getByRole('button', { name: 'SIGN' });
+    await signTransaction(context, signChildBoundy);
+    await webPage.waitForTimeout(2000);
+    await webPage.getByRole('button', { name: 'Close icon' }).click();
+
+
+    // I log in as a Subcurator to a child bounty
+    await mbp.assignChildBountyButton.click();
+    await webPage.getByPlaceholder('00.00').fill('100');
+    await webPage.getByRole('textbox').first().fill('19yjupA9jPNuvtX98ZrsV1aKVepgk82ni1jCNXUHjvrt6d4');
+    const signButton = webPage.getByRole('button', { name: 'SIGN', exact: true });
+    await signTransaction(context, signButton);
+    await webPage.getByRole('button', { name: 'Close icon' }).click();
+
+    await mbp.menu.click();
+    await mbp.logoutButton.click();
+    await mbp.connectWallet.click();
+    await mbp.polkadotConnect.click();
+    await mbp.noCuratorAddress.click();
+
+    const awardButton = webPage.getByRole('button', { name: 'AWARD' });
+    const closeDownButton = webPage.getByRole('button', { name: 'CLOSE DOWN' });
+    const unassignButton = webPage.getByRole('button', { name: 'UNASSIGN' });
+    const readFirstButton = webPage.getByRole('button', { name: 'READ FIRST' });
+
+    await mbp.acceptSubCuratorButton.click();
+    await webPage.getByLabel('I agree').check();
+    await signTransaction(context, signChildBoundy);
+    await webPage.getByRole('button', { name: 'Close icon' }).click();
+
+
+    await expect(awardButton).toBeVisible();
+    await expect(closeDownButton).not.toBeVisible();
+    await expect(unassignButton).not.toBeVisible();
+    await expect(readFirstButton).not.toBeVisible();
+
+
+    // I log in as a Curator
+    await mbp.menu.click();
+    await mbp.logoutButton.click();
+    await mbp.connectWallet.click();
+    await mbp.polkadotConnect.click();
+    await mbp.bountyCreatorAddress.click();
+   
+    await expect(awardButton).not.toBeVisible();
+    await expect(closeDownButton).toBeVisible();
+    await expect(unassignButton).toBeVisible();
+    await expect(readFirstButton).not.toBeVisible();
+    
+
+    // I close down/Award the Child Bounty
+    await closeDownButton.click();
+    await webPage.getByLabel('Close down anyway').check();
+    await signTransaction(context, signButton)
+    await webPage.getByRole('button', { name: 'Close icon' }).click();
+    await expect(readFirstButton).toBeVisible();
+
+    
   });

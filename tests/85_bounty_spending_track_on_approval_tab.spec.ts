@@ -55,12 +55,12 @@ test("BM-85 | Creates Bounty and fowards it to status funded", async ({
     // I click on the Submit button and I sign the transaction
     await signTransaction(context, cbp.submitButton);
     await webPage.waitForTimeout(2000);
-    await webPage.locator(".fill-white").click();
+    await webPage.getByRole('button', { name: 'Close icon' }).click();
 
     // I am on the Bounty creation success screen, after creating a Bounty
-    const bountyId1 = await getLatestBountyId();
-    const bountyHeader1 = webPage.locator('div.bg-secondary p');
-    await expect(bountyHeader1).toHaveText(`#${bountyId1} ${title}`);
+    const bountyId = await getLatestBountyId();
+    const bountyHeader1 = webPage.locator("div.bg-backgroundButtonLight").locator("p");
+    await expect(bountyHeader1).toHaveText(`#${bountyId} ${title}`);
 
     
     
